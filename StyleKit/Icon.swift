@@ -1,6 +1,6 @@
 //
 //  Icon.swift
-//  NTComponents
+//  StyleKit
 //
 //  Copyright © 2017 Nathan Tannar.
 //
@@ -28,6 +28,7 @@
 //  Modified to be generic as long as the enum conforms to IconType
 //
 
+import UIKit
 import Foundation
 
 // The protocal that icons must conform to in order to be used by the helper functions for the UI elements
@@ -44,7 +45,7 @@ public struct Icon {
     /// A public reference to the icons bundle, that aims to detect the correct bundle to use.
     public static var bundle: Bundle {
         if nil == Icon.internalBundle {
-            Icon.internalBundle = Bundle(for: NTView.self)
+            Icon.internalBundle = Bundle(for: BundleReference.self)
             let url = Icon.internalBundle!.resourceURL!
             let b = Bundle(url: url)
             if let v = b {
@@ -59,39 +60,13 @@ public struct Icon {
         return UIImage(named: name, in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
     }
     
-    public static let facebook = UIImage(named: "ic_facebook_logo", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-    public static let twitter = UIImage(named: "ic_twitter_logo", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-    public static let google = UIImage(named: "ic_google_logo", in: bundle, compatibleWith: nil)
-    public static let linkedin = UIImage(named: "ic_linkedin_logo", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-    public static let github = UIImage(named: "ic_github_logo", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+    public static let Facebook = UIImage(named: "ic_facebook_logo", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+    public static let Twitter = UIImage(named: "ic_twitter_logo", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+    public static let Google = UIImage(named: "ic_google_logo", in: bundle, compatibleWith: nil)
+    public static let Linkedin = UIImage(named: "ic_linkedin_logo", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+    public static let Github = UIImage(named: "ic_github_logo", in: bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
     
-    public static let NTLogo = icon("NT Logo Black")
-    public static let Delete = icon("Delete_ffffff_100")
     public static let Email = icon("ic_email")
-    public static let Lock = icon("ic_lock")
-    public static let Unlock = icon("ic_unlock")
-    public static let Search = icon("Search")
-    public static let Create = icon("Create")
-    public static let Check = icon("Check")
-    public static let Send = icon("Send")
-    public static let Camera = icon("Camera")
-    public static let Help = icon("Help")
-    public static let More = icon("More")
-    public static let MoreVertical = UIImage().imageRotatedByDegrees(oldImage: icon("More")!, deg: 90)
-    public static let Expand = icon("Expand-100")
-    public static let Spinner = icon("Synchronize-100")
-    public static let PullDownArrow = icon("Down-100")
-    public static let NavBackButton = icon("NavBackButton")
-    public static let Target = icon("Target")
-    public static let MapMarker = icon("MapMarker")
-    public static let Map = icon("Map")
-    public static let Clock = icon("Clock")
-    
-    public struct Arrow {
-        public static let Backward = Icon.icon("Backward_ffffff_100")
-        public static let Forward = Icon.icon("Forward_ffffff_100")
-        public static let Down = Icon.icon("Expand_Arrow")
-    }
 }
 
 /**

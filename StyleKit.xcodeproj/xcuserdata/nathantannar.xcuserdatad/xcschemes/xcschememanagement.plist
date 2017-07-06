@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>StyleKitExample.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>38C39F841F0E0D8800EAFBAA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38C39F9E1F0E0E3700EAFBAA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

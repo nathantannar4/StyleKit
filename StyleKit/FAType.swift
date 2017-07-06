@@ -1,6 +1,6 @@
 //
 //  FAType.swift
-//  NTComponents
+//  StyleKit
 //
 //  Copyright © 2017 Nathan Tannar.
 //

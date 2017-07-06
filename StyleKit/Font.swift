@@ -1,6 +1,6 @@
 //
 //  Font.swift
-//  NTComponents
+//  StyleKit
 //
 //  Copyright © 2017 Nathan Tannar.
 //
@@ -27,12 +27,15 @@
 //  Typography defaults inspired by https://experience.sap.com/fiori-design-ios/article/typography/
 //
 
+import UIKit
 import Foundation
 import CoreFoundation
 
-public enum NTPreferredFontStyle {
+public enum PreferredFontStyle {
     case title, subtitle, body, callout, caption, footnote, headline, subhead, disabled
 }
+
+internal class BundleReference: UIView {}
 
 public struct Font {
 
@@ -42,7 +45,7 @@ public struct Font {
     /// A public reference to the font bundle, that aims to detect the correct bundle to use.
     public static var bundle: Bundle {
         if nil == Font.internalBundle {
-            Font.internalBundle = Bundle(for: NTView.self)
+            Font.internalBundle = Bundle(for: BundleReference.self)
             let url = Font.internalBundle!.resourceURL!
             let b = Bundle(url: url)
             if let v = b {
@@ -86,7 +89,7 @@ public struct Font {
         
         // Else try to load the font
         guard let url = fromBundle.url(forResource: name, withExtension: withExtension) else {
-            Log.write(.error, "Failed to find the font: \(name).\(withExtension) in the supplied bundle")
+            print("Failed to find the font: \(name).\(withExtension) in the supplied bundle")
             return nil
         }
         guard let fontDataProvider = CGDataProvider(url: url as CFURL) else {
@@ -96,8 +99,7 @@ public struct Font {
         var error: Unmanaged<CFError>?
         
         guard CTFontManagerRegisterGraphicsFont(font, &error) else {
-            Log.write(.error, "Failed to register font from file: \(name).\(withExtension)")
-            Log.write(.error, error.debugDescription)
+            print("Failed to register font from file: \(name).\(withExtension)", error.debugDescription)
             return nil
         }
         return UIFont(name: name, size: size)
@@ -140,7 +142,7 @@ public extension UILabel {
      - parameter to: The style of your preferred font
      - returns: Void
     */
-    func setPreferredFontStyle(to style: NTPreferredFontStyle) {
+    func setPreferredFontStyle(to style: PreferredFontStyle) {
         switch style {
         case .title:
             self.textColor = Color.Default.Text.Title
@@ -180,7 +182,7 @@ public extension UITextField {
      - parameter to: The style of your preferred font
      - returns: Void
     */
-    func setPreferredFontStyle(to style: NTPreferredFontStyle) {
+    func setPreferredFontStyle(to style: PreferredFontStyle) {
         switch style {
         case .title:
             self.textColor = Color.Default.Text.Title
@@ -220,7 +222,7 @@ public extension UITextView {
      - parameter to: The style of your preferred font
      - returns: Void
     */
-    func setPreferredFontStyle(to style: NTPreferredFontStyle) {
+    func setPreferredFontStyle(to style: PreferredFontStyle) {
         switch style {
         case .title:
             self.textColor = Color.Default.Text.Title
@@ -260,7 +262,7 @@ public extension UIButton {
      - parameter to: The style of your preferred font
      - returns: Void
      */
-    func setPreferredFontStyle(to style: NTPreferredFontStyle) {
+    func setPreferredFontStyle(to style: PreferredFontStyle) {
         switch style {
         case .title:
             self.setTitleColor(Color.Default.Text.Title, for: .normal)

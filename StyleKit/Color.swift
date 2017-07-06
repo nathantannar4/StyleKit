@@ -1,6 +1,6 @@
 //
 //  Color.swift
-//  NTComponents
+//  StyleKit
 //
 //  Copyright © 2017 Nathan Tannar.
 //
@@ -24,16 +24,16 @@
 //
 //  Created by Nathan Tannar on 2/12/17.
 //
-//  Colors From https://material.io/guidelines/style/color.html & https://experience.sap.com/fiori-design-ios/
-//  Use the Material Design Color Tool to design your palette: https://material.io/color/#!/?view.left=0&view.right=0
-//
+
+import UIKit
+import Foundation
 
 public struct Color {
 
     public struct Default {
 
         /**
-         Overrides the default background colors of navigation views and buttons
+         Overrides the default background colors of navigation views and buttons. Also changes the tint of button, view and toolbar
 
          - note: The tint color will be adjusted to black or white
          - parameter to: The base color used to set new values
@@ -51,10 +51,11 @@ public struct Color {
                 Color.Default.Text.Title = .white
                 Color.Default.Text.Subtitle = UIColor.white.darker(by: 5)
             }
+            applyChanges()
         }
 
         /**
-         Overrides the default background/tint colors of navigation views and buttons
+         Overrides the default tint colors of navigation views and buttons
 
          - parameter to: The base color used to set new values
          - returns: Void
@@ -66,10 +67,11 @@ public struct Color {
             Color.Default.Tint.Inactive = color.darker(by: 20)
             Color.Default.Tint.View = color
             Color.Default.Status.Info = color
+            applyChanges()
         }
 
         /**
-         Overrides the default background colors of controllers and views with some having lighter/darker variations
+         Overrides the default background color of button and changes the tint of the toolbar and view to the new color
 
          - parameter to: The base color used to set new values
          - returns: Void
@@ -79,16 +81,34 @@ public struct Color {
             Color.Default.Tint.View = color
             Color.Default.Status.Info = color
             Color.Default.Tint.Toolbar = color
+            applyChanges()
         }
 
         /**
-         Overrides the default background/tint colors of buttons
+         Overrides the default background/tint colors of the views and toolbar
 
          - parameter to: The base color used to set new values
          - returns: Void
         */
-        public static func setAccent(to color: UIColor) {
-
+        public static func setDetail(to color: UIColor) {
+            Color.Default.Tint.View = color
+            Color.Default.Tint.Toolbar = color
+            applyChanges()
+        }
+        
+        internal static func applyChanges() {
+            customizeView()
+            customizeImageView()
+            customizeTableView()
+            customizeNavigationBar()
+            customizeTabBar()
+            customizeButton()
+            customizeSwitch()
+            customizeSearchBar()
+            customizeSegmentedControl()
+            customizeSlider()
+            customizeToolbar()
+            customizePageControl()
         }
 
         /**
@@ -119,13 +139,11 @@ public struct Color {
         }
 
         public struct Tint {
-
-            // 007AFF is the hex code for the default blue tint in iOS
-            public static var View          =  UIColor(hex: "007AFF")
-            public static var Button        =  UIColor(hex: "007AFF")
-            public static var NavigationBar =  UIColor(hex: "007AFF")
-            public static var TabBar        =  UIColor(hex: "007AFF")
-            public static var Toolbar       =  UIColor(hex: "007AFF")
+            public static var View          =  UIColor.lightBlue
+            public static var Button        =  UIColor.lightBlue
+            public static var NavigationBar =  UIColor.lightBlue
+            public static var TabBar        =  UIColor.lightBlue
+            public static var Toolbar       =  UIColor.lightBlue
             public static var Inactive      =  Color.Gray.P500
         }
 
@@ -151,7 +169,7 @@ public struct Color {
         }
 
         public struct Status {
-            public static var Info    = UIColor(hex: "007AFF")
+            public static var Info    = UIColor.lightBlue
             public static var Success = UIColor(hex: "#37D387")
             public static var Warning = Color.Orange.P800.lighter(by: 10)
             public static var Danger  = UIColor(hex: "#FF6E6E")
@@ -163,12 +181,121 @@ public struct Color {
             public static var Radius:  CGFloat = 3
             public static var Offset: CGSize   = CGSize(width: 0, height: 2)
         }
+        
+        // UIView
+        public static func customizeView(backgroundColor: UIColor = Color.Default.Background.View,
+                                         tintColor: UIColor = Color.Default.Tint.View) {
+            UIView.appearance().backgroundColor = backgroundColor
+            UIView.appearance().tintColor = tintColor
+        }
+        
+        // UIImageView
+        public static func customizeImageView(backgroundColor: UIColor = Color.Default.Background.View,
+                                         tintColor: UIColor = Color.Default.Tint.View) {
+            UIImageView.appearance().backgroundColor = backgroundColor
+            UIImageView.appearance().tintColor = tintColor
+        }
+        
+        // UITableView
+        public static func customizeTableView(backgroundColor: UIColor = Color.Default.Background.View,
+                                              tintColor: UIColor = Color.Default.Tint.View) {
+            
+            UITableView.appearance().tintColor = tintColor
+            UITableView.appearance().backgroundColor = backgroundColor
+        }
+        
+        // UINavigationBar
+        public static func customizeNavigationBar(barColor: UIColor = Color.Default.Background.NavigationBar,
+                                                  textColor: UIColor = Color.Default.Text.Title,
+                                                  font: UIFont = Font.Default.Title,
+                                                  buttonTint: UIColor = Color.Default.Tint.NavigationBar) {
+            
+            UINavigationBar.appearance().barTintColor = barColor
+            UINavigationBar.appearance().tintColor = buttonTint
+            UINavigationBar.appearance().backgroundColor = barColor
+            UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: textColor, NSFontAttributeName: font.fontName]
+            UINavigationBar.appearance().layer.shadowColor = Color.Default.Shadow.cgColor
+            UINavigationBar.appearance().layer.shadowOffset = Color.Default.Shadow.Offset
+            UINavigationBar.appearance().layer.shadowOpacity = Color.Default.Shadow.Opacity
+            UINavigationBar.appearance().layer.shadowRadius = Color.Default.Shadow.Radius
+        }
+        
+        // UITabBar
+        public static func customizeTabBar(barColor: UIColor = Color.Default.Background.TabBar,
+                                           tintColor: UIColor = Color.Default.Tint.TabBar,
+                                           font: UIFont = Font.Default.Subtitle) {
+            
+            UITabBar.appearance().barTintColor = barColor
+            UITabBar.appearance().tintColor = tintColor
+            UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: font.fontName], for: .normal)
+        }
+        
+        // UIButton
+        public static func customizeButton(backgroundColor: UIColor = Color.Default.Background.Button,
+                                           tintColor: UIColor = Color.Default.Tint.Button,
+                                           font: UIFont = Font.Default.Body) {
+            
+            UIButton.appearance().backgroundColor = backgroundColor
+            UIButton.appearance().tintColor = tintColor
+            UIButton.appearance().setTitleColor(backgroundColor.isLight ? .black : .white, for: .normal)
+        }
+        
+        // UISwitch
+        public static func customizeSwitch(onTintColor: UIColor = Color.Default.Tint.View) {
+            
+            UISwitch.appearance().onTintColor = onTintColor
+        }
+        
+        // UISearchBar
+        public static func customizeSearchBar(barColor: UIColor = Color.Default.Background.View, tintColor: UIColor = Color.Default.Tint.View) {
+            
+            UISearchBar.appearance().barTintColor = barColor
+            UISearchBar.appearance().tintColor = barColor
+        }
+        
+        // UISegmentedControl
+        public static func customizeSegmentedControl(backgroundColor: UIColor = Color.Default.Background.NavigationBar,
+                                                     tintColor: UIColor = Color.Default.Tint.NavigationBar,
+                                                     font: UIFont = Font.Default.Body) {
+            
+            UISegmentedControl.appearance().backgroundColor = backgroundColor
+            UISegmentedControl.appearance().tintColor = tintColor
+            UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: font.familyName], for: .normal)
+        }
+        
+        // UISlider
+        public static func customizeSlider(minimumTrackTintColor: UIColor = Color.Default.Tint.View) {
+            
+            UISlider.appearance().minimumTrackTintColor = minimumTrackTintColor
+        }
+        
+        // UIToolbar
+        public static func customizeToolbar(backgroundColor: UIColor = Color.Default.Background.Toolbar,
+                                            tintColor: UIColor = Color.Default.Tint.Toolbar) {
+            
+            UIToolbar.appearance().tintColor = tintColor
+            UIToolbar.appearance().backgroundColor = backgroundColor
+        }
+        
+        
+        // UIPageControl
+        public static func customizePageControl(currentPageTintColor: UIColor = Color.Default.Tint.View) {
+            
+            UIPageControl.appearance().pageIndicatorTintColor = UIColor.lightGray
+            UIPageControl.appearance().currentPageIndicatorTintColor = currentPageTintColor
+            UIPageControl.appearance().backgroundColor = UIColor.clear
+        }
     }
 
     public static let FacebookBlue = UIColor(hex: "#3b5998")
     public static let TwitterBlue  = UIColor(hex: "#00aced")
-    public static let LinkedInBlue  = UIColor(hex: "#0077b5")
+    public static let LinkedInBlue = UIColor(hex: "#0077b5")
 
+    
+    // Google's Material Design Color Palette
+    
+    
+    /// GMD Red
     public struct Red {
         public static let P50	= UIColor(rgba: 0xFDE0DCFF)
         public static let P100	= UIColor(rgba: 0xF9BDBBFF)
@@ -185,7 +312,8 @@ public struct Color {
         public static let A400	= UIColor(rgba: 0xFF2D6FFF)
         public static let A700	= UIColor(rgba: 0xE00032FF)
     }
-
+    
+    /// GMD Pink
     public struct Pink {
         public static let P50	= UIColor(rgba: 0xFCE4ECFF)
         public static let P100	= UIColor(rgba: 0xF8BBD0FF)
@@ -202,7 +330,8 @@ public struct Color {
         public static let A400	= UIColor(rgba: 0xF50057FF)
         public static let A700	= UIColor(rgba: 0xC51162FF)
     }
-
+    
+    /// GMD Purple
     public struct Purple {
         public static let P50	= UIColor(rgba: 0xF3E5F5FF)
         public static let P100	= UIColor(rgba: 0xE1BEE7FF)
@@ -220,6 +349,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0xAA00FFFF)
     }
 
+    /// GMD Deep Purple
     public struct DeepPurple {
         public static let P50  	= UIColor(rgba: 0xEDE7F6FF)
         public static let P100	= UIColor(rgba: 0xD1C4E9FF)
@@ -236,7 +366,8 @@ public struct Color {
         public static let A400	= UIColor(rgba: 0x651FFFFF)
         public static let A700	= UIColor(rgba: 0x6200EAFF)
     }
-
+    
+    /// GMD Indigo
     public struct Indigo {
         public static let P50   = UIColor(rgba: 0xE8EAF6FF)
         public static let P100	= UIColor(rgba: 0xC5CAE9FF)
@@ -254,6 +385,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0x304FFEFF)
     }
 
+    /// GMD Blue
     public struct Blue {
         public static let P50	= UIColor(rgba: 0xE7E9FDFF)
         public static let P100	= UIColor(rgba: 0xD0D9FFFF)
@@ -271,6 +403,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0x4D69FFFF)
     }
 
+    /// GMD Light Blue
     public struct LightBlue {
         public static let P50   = UIColor(rgba: 0xE1F5FEFF)
         public static let P100	= UIColor(rgba: 0xB3E5FCFF)
@@ -288,6 +421,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0x0091EAFF)
     }
 
+    /// GMD Cyan
     public struct Cyan {
         public static let P50	= UIColor(rgba: 0xE0F7FAFF)
         public static let P100	= UIColor(rgba: 0xB2EBF2FF)
@@ -305,6 +439,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0x00B8D4FF)
     }
 
+    /// GMD Teal
     public struct Teal {
         public static let P50  	= UIColor(rgba: 0xE0F2F1FF)
         public static let P100	= UIColor(rgba: 0xB2DFDBFF)
@@ -322,6 +457,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0x00BFA5FF)
     }
 
+    /// GMD Green
     public struct Green {
         public static let P50	= UIColor(rgba: 0xD0F8CEFF)
         public static let P100	= UIColor(rgba: 0xA3E9A4FF)
@@ -339,6 +475,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0x12C700FF)
     }
 
+    /// GMD Light Green
     public struct LightGreen {
         public static let P50  	= UIColor(rgba: 0xF1F8E9FF)
         public static let P100	= UIColor(rgba: 0xDCEDC8FF)
@@ -356,6 +493,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0x64DD17FF)
     }
 
+    /// GMD Lime
     public struct Lime {
         public static let P50 	= UIColor(rgba: 0xF9FBE7FF)
         public static let P100	= UIColor(rgba: 0xF0F4C3FF)
@@ -373,6 +511,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0xAEEA00FF)
     }
 
+    /// GMD Yello
     public struct Yellow {
         public static let P50 	= UIColor(rgba: 0xFFFDE7FF)
         public static let P100	= UIColor(rgba: 0xFFF9C4FF)
@@ -390,6 +529,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0xFFD600FF)
     }
 
+    /// GMD Amber
     public struct Amber {
         public static let P50 	= UIColor(rgba: 0xFFF8E1FF)
         public static let P100	= UIColor(rgba: 0xFFECB3FF)
@@ -407,6 +547,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0xFFAB00FF)
     }
 
+    /// GMD Orange
     public struct Orange {
         public static let P50 	= UIColor(rgba: 0xFFF3E0FF)
         public static let P100	= UIColor(rgba: 0xFFE0B2FF)
@@ -424,6 +565,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0xFF6D00FF)
     }
 
+    /// GMD Deep Orange
     public struct DeepOrange {
         public static let P50 	= UIColor(rgba: 0xFBE9E7FF)
         public static let P100	= UIColor(rgba: 0xFFCCBCFF)
@@ -441,6 +583,7 @@ public struct Color {
         public static let A700	= UIColor(rgba: 0xDD2C00FF)
     }
 
+    /// GMD Brown
     public struct Brown {
         public static let P50 	= UIColor(rgba: 0xEFEBE9FF)
         public static let P100	= UIColor(rgba: 0xD7CCC8FF)
@@ -454,6 +597,7 @@ public struct Color {
         public static let P900	= UIColor(rgba: 0x3E2723FF)
     }
 
+    /// GMD Gray
     public struct Gray {
         public static let P0	= UIColor(rgba: 0xFFFFFFFF)
         public static let P50	= UIColor(rgba: 0xFAFAFAFF)
@@ -469,6 +613,7 @@ public struct Color {
         public static let P1000 = UIColor(rgba: 0x000000FF)
     }
 
+    /// GMD Blue Gray
     public struct BlueGray {
         public static let P50 	= UIColor(rgba: 0xECEFF1FF)
         public static let P100	= UIColor(rgba: 0xCFD8DCFF)
@@ -482,7 +627,10 @@ public struct Color {
         public static let P900	= UIColor(rgba: 0x263238FF)
     }
 
+    
+    /// Pure Black
     public static let Black = UIColor(hex: "000000")
-
+    
+    /// Pure White
     public static let White = UIColor(hex: "FFFFFF")
 }
