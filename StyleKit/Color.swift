@@ -46,12 +46,13 @@ public struct Color {
             Color.Default.Tint.Button = color
             Color.Default.Tint.View = color
             Color.Default.Tint.Toolbar = color
+            Color.Default.Status.Info = color
+            Color.Default.Tint.Inactive = color.darker(by: 20)
             
             if color.isDark {
                 Color.Default.Text.Title = .white
                 Color.Default.Text.Subtitle = UIColor.white.darker(by: 5)
             }
-            applyChanges()
         }
 
         /**
@@ -64,10 +65,6 @@ public struct Color {
             Color.Default.Tint.NavigationBar = color
             Color.Default.Tint.TabBar = color
             Color.Default.Tint.Toolbar = color
-            Color.Default.Tint.Inactive = color.darker(by: 20)
-            Color.Default.Tint.View = color
-            Color.Default.Status.Info = color
-            applyChanges()
         }
 
         /**
@@ -81,7 +78,6 @@ public struct Color {
             Color.Default.Tint.View = color
             Color.Default.Status.Info = color
             Color.Default.Tint.Toolbar = color
-            applyChanges()
         }
 
         /**
@@ -93,10 +89,9 @@ public struct Color {
         public static func setDetail(to color: UIColor) {
             Color.Default.Tint.View = color
             Color.Default.Tint.Toolbar = color
-            applyChanges()
         }
         
-        internal static func applyChanges() {
+        internal static func customizeAll() {
             customizeView()
             customizeImageView()
             customizeTableView()
@@ -107,6 +102,7 @@ public struct Color {
             customizeSearchBar()
             customizeSegmentedControl()
             customizeSlider()
+            customizeStepper()
             customizeToolbar()
             customizePageControl()
         }
@@ -187,6 +183,9 @@ public struct Color {
                                          tintColor: UIColor = Color.Default.Tint.View) {
             UIView.appearance().backgroundColor = backgroundColor
             UIView.appearance().tintColor = tintColor
+            UITextField.appearance().tintColor = tintColor
+            UITextView.appearance().tintColor = tintColor
+            UIImageView.appearance().tintColor = tintColor
         }
         
         // UIImageView
@@ -227,7 +226,7 @@ public struct Color {
             
             UITabBar.appearance().barTintColor = barColor
             UITabBar.appearance().tintColor = tintColor
-            UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: font.fontName], for: .normal)
+//            UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName: font.fontName], for: .normal)
         }
         
         // UIButton
@@ -243,7 +242,14 @@ public struct Color {
         // UISwitch
         public static func customizeSwitch(onTintColor: UIColor = Color.Default.Tint.View) {
             
-            UISwitch.appearance().onTintColor = onTintColor
+//            UISwitch.appearance().onTintColor = onTintColor
+            UISwitch.appearance().tintColor = onTintColor
+        }
+        
+        // UIStepper
+        public static func customizeStepper(tintColor: UIColor = Color.Default.Tint.View) {
+            
+            UIStepper.appearance().tintColor = tintColor
         }
         
         // UISearchBar
@@ -260,13 +266,14 @@ public struct Color {
             
             UISegmentedControl.appearance().backgroundColor = backgroundColor
             UISegmentedControl.appearance().tintColor = tintColor
-            UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: font.familyName], for: .normal)
+//            UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: font.fontName], for: .normal)
         }
         
         // UISlider
-        public static func customizeSlider(minimumTrackTintColor: UIColor = Color.Default.Tint.View) {
+        public static func customizeSlider(tintColor: UIColor = Color.Default.Tint.View) {
             
-            UISlider.appearance().minimumTrackTintColor = minimumTrackTintColor
+            UISlider.appearance().minimumTrackTintColor = tintColor
+            UISlider.appearance().tintColor = tintColor
         }
         
         // UIToolbar

@@ -9,7 +9,7 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>StyleKitExample.xcscheme</key>
+		<key>StyleKitDemo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
@@ -28,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>38C39F9E1F0E0E3700EAFBAA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38C39FCB1F11C81800EAFBAA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

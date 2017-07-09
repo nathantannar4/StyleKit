@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
-//  StyleKitExample
+//  SecondViewController.swift
+//  StyleKitDemo
 //
-//  Created by Nathan Tannar on 7/5/17.
+//  Created by Nathan Tannar on 7/8/17.
 //  Copyright © 2017 Nathan Tannar. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class SecondViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

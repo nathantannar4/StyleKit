@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38C39F9E1F0E0E3700EAFBAA"
-               BuildableName = "StyleKitExample.app"
-               BlueprintName = "StyleKitExample"
+               BlueprintIdentifier = "38C39FCB1F11C81800EAFBAA"
+               BuildableName = "StyleKitDemo.app"
+               BlueprintName = "StyleKitDemo"
                ReferencedContainer = "container:StyleKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "38C39F9E1F0E0E3700EAFBAA"
-            BuildableName = "StyleKitExample.app"
-            BlueprintName = "StyleKitExample"
+            BlueprintIdentifier = "38C39FCB1F11C81800EAFBAA"
+            BuildableName = "StyleKitDemo.app"
+            BlueprintName = "StyleKitDemo"
             ReferencedContainer = "container:StyleKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "38C39F9E1F0E0E3700EAFBAA"
-            BuildableName = "StyleKitExample.app"
-            BlueprintName = "StyleKitExample"
+            BlueprintIdentifier = "38C39FCB1F11C81800EAFBAA"
+            BuildableName = "StyleKitDemo.app"
+            BlueprintName = "StyleKitDemo"
             ReferencedContainer = "container:StyleKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "38C39F9E1F0E0E3700EAFBAA"
-            BuildableName = "StyleKitExample.app"
-            BlueprintName = "StyleKitExample"
+            BlueprintIdentifier = "38C39FCB1F11C81800EAFBAA"
+            BuildableName = "StyleKitDemo.app"
+            BlueprintName = "StyleKitDemo"
             ReferencedContainer = "container:StyleKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
